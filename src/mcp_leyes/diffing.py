@@ -11,7 +11,8 @@ from __future__ import annotations
 import difflib
 import re
 
-_TOKENS = re.compile(r"\s+|[\wÀ-ÿ]+|[^\w\s]", re.UNICODE)
+# Dates (30-11-2012) are one token, so a changed note reads [-30-11-2012-] {+01-05-2019+}.
+_TOKENS = re.compile(r"\s+|\d{1,2}-\d{1,2}-\d{4}|[\wÀ-ÿ]+|[^\w\s]", re.UNICODE)
 
 LEGEND = "Leyenda: `[-texto eliminado-]` · `{+texto añadido+}`"
 

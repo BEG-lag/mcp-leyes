@@ -112,6 +112,12 @@ def test_word_diff_marks_only_changed_words() -> None:
     )
 
 
+def test_word_diff_keeps_dates_whole() -> None:
+    assert word_diff_line(
+        "*Fracción reformada DOF 30-11-2012*", "*Fracción reformada DOF 01-05-2019*"
+    ) == ("*Fracción reformada DOF [-30-11-2012-] {+01-05-2019+}*")
+
+
 def test_word_diff_pairs_similar_paragraphs_and_elides_the_rest() -> None:
     old = (
         "Primero igual.\n\nIV. Por cada seis días de trabajo deberá disfrutar el operario."
