@@ -206,15 +206,16 @@ EDITORIAL_LABELS = {
 }
 
 
-def _event_block(e: HistoryEvent, commit_url: str) -> str:
+def _event_block(e: HistoryEvent, commit_url: str, previous_label: str | None) -> str:
     v = e.version
     change = CHANGE_LABELS[e.change]
     if e.editorial:
         change += f": {EDITORIAL_LABELS[e.editorial]}"
     title = f"### DOF {dmy(v.dof_date)} · {change} · {_commit(commit_url, v)}"
     items: list[str] = []
-    if e.label and e.change not in {"eliminado", "ausente"}:
-        items.append(f"Encabezado: {normalize_space(e.label)}")
+    label = normalize_space(e.label) if e.label else None
+    if label and e.change not in {"eliminado", "ausente"} and label != previous_label:
+        items.append(f"Encabezado: {label}")
     attributed = set(e.attributed)
     decrees = e.decrees
     if attributed:
@@ -251,6 +252,10 @@ def _event_block(e: HistoryEvent, commit_url: str) -> str:
                 "Versión que agrupa varias reformas y la nota editorial no indica cuál tocó el "
                 "artículo." + hint
             )
+    elif e.editorial:
+        items.append(
+            "Ninguna nota editorial nueva explica el cambio; revisa el detalle con diff_article."
+        )
     elif v.info.notes:
         items.append("Nota del commit: " + " ".join(v.info.notes))
     return title + ("\n\n" + _bullets(items) if items else "")
@@ -275,7 +280,12 @@ def render_history(h: History, *, commit_url) -> str:
         + ". Versiones sin cambios en este artículo: "
         f"{sum(1 for e in h.events if e.change == 'sin_cambio')}."
     )
-    blocks = [_event_block(e, commit_url(e.version)) for e in shown]
+    blocks = []
+    previous_label: str | None = None
+    for e in shown:
+        blocks.append(_event_block(e, commit_url(e.version), previous_label))
+        if e.label:
+            previous_label = normalize_space(e.label)
     notes = []
     if h.earlier_notes:
         notes.append(
@@ -372,6 +382,9 @@ def render_article_diff(d: ArticleDiff, *, mode: str, commit_url) -> str:
     )
 
 
+MAX_REFORM_CHARS = 40_000
+
+
 def render_reform_diff(r: ReformDiff, *, mode: str, limit: int, offset: int, commit_url) -> str:
     law, v, p = r.law, r.version, r.previous
     decrees: list[str] = []
@@ -445,8 +458,12 @@ def render_reform_diff(r: ReformDiff, *, mode: str, limit: int, offset: int, com
     else:
         labels = ("**Artículos con cambios:** " + listing(r.changed)) if r.changed else ""
     page = r.changed[offset : offset + limit]
-    sections = []
+    sections: list[str] = []
+    used = 0
+    shown = 0
     for c in page:
+        if sections and used > MAX_REFORM_CHARS:
+            break  # keep one answer readable; the rest is one offset away
         tag = c.change + (f"; nota cita DOF {dmy(r.reform_date)}" if c.cites_date else "")
         if c.editorial:
             tag += "; " + EDITORIAL_LABELS[c.editorial]
@@ -473,9 +490,11 @@ def render_reform_diff(r: ReformDiff, *, mode: str, limit: int, offset: int, com
             if mode != "unified":
                 body = body.removeprefix(LEGEND + "\n\n")
         sections.append(f"## {c.label} ({tag})\n\n{body}")
+        used += len(sections[-1])
+        shown += 1
     nav = ""
     if r.changed:
-        end = offset + len(page)
+        end = offset + shown
         nav = f"Mostrando artículos {offset + 1}-{end} de {len(r.changed)}."
         if end < len(r.changed):
             nav += f" Usa offset={end} para continuar, o diff_article para uno en particular."
