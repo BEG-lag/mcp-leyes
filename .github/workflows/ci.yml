@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Ruff
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+      - run: uv run --frozen ruff check .
+      - run: uv run --frozen ruff format --check .
+
+  test:
+    name: Tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          python-version: ${{ matrix.python-version }}
+      - name: Offline test suite (fixture git repository built in the test, no network)
+        run: uv run --frozen pytest
+      - name: Entry point installs and runs
+        run: uv run --frozen mcp-leyes --version
+
+  package:
+    name: server.json and container image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+      - name: Validate server.json against the official MCP Registry schema
+        run: uvx check-jsonschema@0.39.0 --schemafile "$(jq -r '.["$schema"]' server.json)" server.json
+      - uses: docker/setup-buildx-action@v4
+      - name: Build the image (with a leyes-mx snapshot)
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          load: true
+          tags: mcp-leyes:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: MCP handshake and an offline query inside the container
+        run: >
+          uv run --frozen python scripts/smoke_stdio.py --query --
+          docker run -i --rm --network none -e MCP_LEYES_REFRESH_HOURS=0 mcp-leyes:ci
+      - name: Ownership label matches server.json
+        run: |
+          expected="$(jq -r .name server.json)"
+          actual="$(docker inspect --format '{{ index .Config.Labels "io.modelcontextprotocol.server.name" }}' mcp-leyes:ci)"
+          echo "label: $actual"
+          test "$actual" = "$expected"
