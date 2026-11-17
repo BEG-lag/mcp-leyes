@@ -2,7 +2,7 @@
 
 Recorded on 2026-11-17 with `uv run python scripts/demo.py --write`: a real MCP client talking to `mcp-leyes` over stdio, with the real leyes-mx history. Nothing below was edited.
 
-First call (`list_laws`) with an empty cache, including the first sync from `https://github.com/BEG-lag/leyes-mx.git`: 7.6 s. Cache after the sync: 29 MB (375 versions, 189,611 indexed sections, leyes-mx at `43e040e`). Later calls read from the local clone and index; their timings are shown with each call.
+First call (`list_laws`) with an empty cache, including the first sync from `https://github.com/BEG-lag/leyes-mx.git`: 7.0 s. Cache after the sync: 29 MB (375 versions, 189,611 indexed sections, leyes-mx at `43e040e`). Later calls read from the local clone and index; their timings are shown with each call.
 
 ## tools/list
 
@@ -10,12 +10,12 @@ First call (`list_laws`) with an empty cache, including the first sync from `htt
 
 ## list_laws
 
-`{}` · 7.18 s · ok
+`{}` · 6.43 s · ok
 
 ````markdown
 # Leyes federales disponibles
 
-36 leyes · 375 versiones en git · versión más reciente: DOF 07-10-2026 · leyes-mx `43e040e` · sincronizado 17-11-2026 15:25 (CDMX)
+36 leyes · 375 versiones en git · versión más reciente: DOF 07-10-2026 · leyes-mx `43e040e` · sincronizado 17-11-2026 15:28 (CDMX)
 
 ## Constitución
 
@@ -257,12 +257,10 @@ _No oficial. Solo el DOF es fuente auténtica. No es asesoría legal. Textos: ve
 
 ### DOF 29-08-2008 · modificado: cambio menor sin nota de reforma (posible corrección editorial de la Cámara) · [`b2c41e3`](https://github.com/BEG-lag/leyes-mx/commit/b2c41e3814d434627d9a230e55ef62d287a67dc8)
 
-- Encabezado: Artículo 27.
-- Nota del commit: No hay una versión archivada entre estos decretos, así que este commit los agrupa.
+- Ninguna nota editorial nueva explica el cambio; revisa el detalle con diff_article.
 
 ### DOF 13-10-2011 · modificado · [`b6d33e0`](https://github.com/BEG-lag/leyes-mx/commit/b6d33e0468615bad79d0c51658d5273bede92e47)
 
-- Encabezado: Artículo 27.
 - Decretos de la versión:
   - DOF 12-10-2011: DECRETO por el que se adiciona un párrafo décimo al artículo 4o. y se reforma la fracción XXIX-J del artículo 73 de la Constitución Política de los Estados … ([PDF](https://www.diputados.gob.mx/LeyesBiblio/proceso/lxi/142_DOF_12oct11.pdf))
   - DOF 12-10-2011: DECRETO por el que se reforman los párrafos sexto y séptimo del artículo 4o. y se adiciona la fracción XXIX-P al artículo 73, de la Constitución Política de … ([PDF](https://www.diputados.gob.mx/LeyesBiblio/proceso/lxi/143_DOF_12oct11.pdf))
@@ -271,7 +269,6 @@ _No oficial. Solo el DOF es fuente auténtica. No es asesoría legal. Textos: ve
 
 ### DOF 11-06-2013 · modificado · [`8f20cfc`](https://github.com/BEG-lag/leyes-mx/commit/8f20cfc728f94e59e96e2751a03bd8c20ec73d1b)
 
-- Encabezado: Artículo 27.
 - Decretos de la versión:
   - DOF 05-06-2013: DECRETO por el que se reforman los párrafos primero y último del artículo 25, así como el párrafo primero y tercero del apartado A del artículo 26 de la … ([PDF](https://www.diputados.gob.mx/LeyesBiblio/proceso/cpeum/CPEUM_207_DOF_05jun13.pdf))
   - DOF 11-06-2013: DECRETO por el que se reforman y adicionan diversas disposiciones de los artículos 6o., 7o., 27, 28, 73, 78, 94 y 105 de la Constitución Política de los … ([PDF](https://www.diputados.gob.mx/LeyesBiblio/ref/dof/CPEUM_ref_208_11jun13.pdf))
@@ -279,26 +276,22 @@ _No oficial. Solo el DOF es fuente auténtica. No es asesoría legal. Textos: ve
 
 ### DOF 10-02-2014 · modificado · [`faadb30`](https://github.com/BEG-lag/leyes-mx/commit/faadb30067a819a363db64453e510d540ef415c3)
 
-- Encabezado: Artículo 27.
 - Decreto (según la nota editorial del artículo):
   - DOF 20-12-2013: DECRETO por el que se reforman y adicionan diversas disposiciones de la Constitución Política de los Estados Unidos Mexicanos, en Materia de Energía. ([PDF](https://www.diputados.gob.mx/LeyesBiblio/proceso/docleg/62/212_DOF_20dic13.pdf))
 - La versión agrupa además 7 decreto(s) de otras fechas que no citan este artículo en sus notas.
 
 ### DOF 29-01-2016 · modificado · [`40fbbef`](https://github.com/BEG-lag/leyes-mx/commit/40fbbefd6cafc18aab1f77b34b65486f5b2201e3)
 
-- Encabezado: Artículo 27.
 - Decreto (según la nota editorial del artículo):
   - DOF 29-01-2016: DECRETO por el que se declaran reformadas y derogadas diversas disposiciones de la Constitución Política de los Estados Unidos Mexicanos, en materia de la … ([PDF](https://www.diputados.gob.mx/LeyesBiblio/proceso/docleg/63/227_DOF_29ene16.pdf))
 - La versión agrupa además 6 decreto(s) de otras fechas que no citan este artículo en sus notas.
 
 ### DOF 11-03-2021 · modificado: solo cambian las notas editoriales de la Cámara · [`76d8e18`](https://github.com/BEG-lag/leyes-mx/commit/76d8e18998eb891ad3a9e145f1528327ebcb8757)
 
-- Encabezado: Artículo 27.
-- Nota del commit: No hay una versión archivada entre estos decretos, así que este commit los agrupa.
+- Ninguna nota editorial nueva explica el cambio; revisa el detalle con diff_article.
 
 ### DOF 15-11-2024 · modificado · [`f7d255b`](https://github.com/BEG-lag/leyes-mx/commit/f7d255b34b363c2de4851aba0334f3fbf8a87ce7)
 
-- Encabezado: Artículo 27.
 - Decreto (según la nota editorial del artículo):
   - DOF 31-10-2024: DECRETO por el que se reforman el párrafo quinto del artículo 25, los párrafos sexto y séptimo del artículo 27 y el párrafo cuarto del artículo 28 de la … ([PDF](https://www.diputados.gob.mx/LeyesBiblio/ref/dof/CPEUM_ref_262_31oct24.pdf))
   - DOF 31-10-2024: DECRETO por el que se reforma el primer párrafo de la fracción II del artículo 107, y se adiciona un quinto párrafo al artículo 105, de la Constitución … ([PDF](https://www.diputados.gob.mx/LeyesBiblio/ref/dof/CPEUM_ref_263_31oct24.pdf))
@@ -306,7 +299,6 @@ _No oficial. Solo el DOF es fuente auténtica. No es asesoría legal. Textos: ve
 
 ### DOF 02-12-2024 · modificado · [`b5be146`](https://github.com/BEG-lag/leyes-mx/commit/b5be146efb0eca84194be902b21efc6e2500839d)
 
-- Encabezado: Artículo 27.
 - Decreto (según la nota editorial del artículo):
   - DOF 02-12-2024: DECRETO por el que se reforman y adicionan los artículos 4o. y 27 de la Constitución Política de los Estados Unidos Mexicanos, en materia de bienestar. ([PDF](https://www.diputados.gob.mx/LeyesBiblio/ref/dof/CPEUM_ref_265_02dic24.pdf))
   - DOF 02-12-2024: DECRETO por el que se reforma y adiciona la fracción XII del Apartado A del artículo 123 de la Constitución Política de los Estados Unidos Mexicanos, en … ([PDF](https://www.diputados.gob.mx/LeyesBiblio/ref/dof/CPEUM_ref_266_02dic24.pdf))
@@ -314,14 +306,12 @@ _No oficial. Solo el DOF es fuente auténtica. No es asesoría legal. Textos: ve
 
 ### DOF 17-01-2025 · modificado · [`b237612`](https://github.com/BEG-lag/leyes-mx/commit/b23761265e286e20309461ddf09fb65268837b36)
 
-- Encabezado: Artículo 27.
 - Decreto (según la nota editorial del artículo):
   - DOF 20-12-2024: DECRETO por el que se reforman, adicionan y derogan diversas disposiciones de la Constitución Política de los Estados Unidos Mexicanos, en materia de … ([PDF](https://www.diputados.gob.mx/LeyesBiblio/ref/dof/CPEUM_ref_268_20dic24.pdf))
 - La versión agrupa además 3 decreto(s) de otras fechas que no citan este artículo en sus notas.
 
 ### DOF 01-04-2025 · modificado · [`b18e57f`](https://github.com/BEG-lag/leyes-mx/commit/b18e57fd7a46fef9b25743876b27609fdb4c05b4)
 
-- Encabezado: Artículo 27.
 - Decreto (según la nota editorial del artículo):
   - DOF 17-03-2025: DECRETO por el que se reforman y adicionan diversas disposiciones de los artículos 4o. y 27 de la Constitución Política de los Estados Unidos Mexicanos, en … ([PDF](https://www.diputados.gob.mx/LeyesBiblio/ref/dof/CPEUM_ref_272_17mar25.pdf))
 - La versión agrupa además 3 decreto(s) de otras fechas que no citan este artículo en sus notas.
@@ -337,7 +327,7 @@ _No oficial. Solo el DOF es fuente auténtica. No es asesoría legal. Textos: ve
 
 ## diff_article
 
-`{"law": "CPEUM", "article": "27", "date_from": "2013-01-01"}` · 0.15 s · ok
+`{"law": "CPEUM", "article": "27", "date_from": "2013-01-01"}` · 0.14 s · ok
 
 ````markdown
 # CPEUM · Artículo 27. · DOF 15-10-2012 → DOF 07-10-2026
@@ -774,7 +764,7 @@ _No oficial. Solo el DOF es fuente auténtica. No es asesoría legal. Textos: ve
 
 ## transitorios
 
-`{"law": "LFT", "decree_date": "2019-05-01", "max_chars": 4000}` · 0.00 s · ok
+`{"law": "LFT", "decree_date": "2019-05-01", "max_chars": 4000}` · 0.01 s · ok
 
 ````markdown
 # LFT · transitorios del decreto DOF 01-05-2019
@@ -800,7 +790,7 @@ _No oficial. Solo el DOF es fuente auténtica. No es asesoría legal. Textos: ve
 
 ## search
 
-`{"query": "subcontrat \"servicios especializados\"", "limit": 5}` · 1.10 s · ok
+`{"query": "subcontrat \"servicios especializados\"", "limit": 5}` · 1.05 s · ok
 
 ````markdown
 # Búsqueda: `subcontrat "servicios especializados"` · texto aplicable al 17-11-2026
@@ -906,7 +896,7 @@ _No oficial. Solo el DOF es fuente auténtica. No es asesoría legal. Textos: ve
 
 ## get_article
 
-`{"law": "CCom", "article": "291", "date": "2010-01-01"}` · 0.00 s · error
+`{"law": "CCom", "article": "291", "date": "2010-01-01"}` · 0.01 s · error
 
 ````markdown
 CCom no tiene el artículo 291 en la versión del DOF 27-08-2009 (aplicable al 01-01-2010). El artículo 291 sí aparece en versiones del DOF 28-03-2018 al 18-02-2026. Ojo: esta versión archivada tiene irregularidades de numeración en la fuente (falta el número 291).
