@@ -1,0 +1,30 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.BEG-lag/mcp-leyes",
+  "title": "Leyes MX: Mexican federal law at any date",
+  "description": "Mexican federal law at any date: articles, reform history, diffs and search over leyes-mx.",
+  "repository": {
+    "url": "https://github.com/BEG-lag/mcp-leyes",
+    "source": "github"
+  },
+  "websiteUrl": "https://github.com/BEG-lag/mcp-leyes",
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "oci",
+      "identifier": "ghcr.io/beg-lag/mcp-leyes:1.0.0",
+      "runtimeHint": "docker",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "MCP_LEYES_REFRESH_HOURS",
+          "description": "Hours between git fetches of leyes-mx (default 24; 0 never fetches and uses the snapshot in the image).",
+          "isRequired": false,
+          "default": "24"
+        }
+      ]
+    }
+  ]
+}
