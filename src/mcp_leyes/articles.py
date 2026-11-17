@@ -204,7 +204,9 @@ class Anomalies:
 
     def describe(self, limit: int = 8) -> str:
         parts = []
-        if self.missing:
+        if len(self.missing) == 1:
+            parts.append(f"falta el número {self.missing[0]}")
+        elif self.missing:
             shown = ", ".join(map(str, self.missing[:limit]))
             more = f" y {len(self.missing) - limit} más" if len(self.missing) > limit else ""
             parts.append(f"faltan los números {shown}{more}")
