@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="1200" height="420" role="img" aria-labelledby="title desc">
+  <title id="title">mcp-leyes</title>
+  <desc id="desc">An MCP server that gives AI agents Mexican federal law at any date, from the leyes-mx git history. A timeline of 44 versions of the Constitution runs along the bottom while a marker picks the one in force on a date. The terminal shows real calls: get_article for article 27 of the Constitution on 2013-01-01 returns the version of DOF 15-10-2012, commit 9cdbce4; diff_article shows radioactivos replaced by radiactivos y litio; diff_reform for the 2019 labor reform finds 571 articles changed, 559 citing DOF 01-05-2019; article_history finds 10 changes in 44 versions.</desc>
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#191d27" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="glow" cx="0.2" cy="0.1" r="0.7">
+      <stop offset="0" stop-color="#cfff45" stop-opacity="0.12"/>
+      <stop offset="0.6" stop-color="#cfff45" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vignette" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0c10" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0a0c10" stop-opacity="0.85"/>
+    </linearGradient>
+    <style>
+      .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; }
+      .serif { font-family: 'Cormorant Garamond', 'Iowan Old Style', Georgia, 'Times New Roman', serif; font-style: italic; }
+      .sans { font-family: Inter, ui-sans-serif, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+      .cursor { animation: blink 1.1s steps(1, end) infinite; }
+      .line { opacity: 0; animation: rise 0.6s ease-out forwards; }
+      .d1 { animation-delay: 0.3s; } .d2 { animation-delay: 0.8s; }
+      .d3 { animation-delay: 1.4s; } .d4 { animation-delay: 1.9s; }
+      .d5 { animation-delay: 2.5s; } .d6 { animation-delay: 3.0s; }
+      .d7 { animation-delay: 3.6s; } .d8 { animation-delay: 4.1s; }
+      .commit { opacity: 0; animation: pop 0.4s ease-out forwards; }
+      .scan { animation: scan 7s cubic-bezier(0.65, 0, 0.35, 1) 0.6s infinite alternate; }
+      @keyframes blink { 50% { opacity: 0; } }
+      @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+      @keyframes pop { from { opacity: 0; } to { opacity: 1; } }
+      @keyframes scan { from { transform: translateX(0); } to { transform: translateX(466px); } }
+      @media (prefers-reduced-motion: reduce) {
+        .cursor, .line, .commit, .scan { animation: none; opacity: 1; }
+        .scan { transform: translateX(152px); }
+      }
+    </style>
+  </defs>
+
+  <rect width="1200" height="420" fill="#0a0c10"/>
+  <rect width="1200" height="420" fill="url(#grid)" opacity="0.7"/>
+  <rect width="1200" height="420" fill="url(#glow)"/>
+  <rect y="270" width="1200" height="150" fill="url(#vignette)"/>
+
+  <!-- Identity -->
+  <g>
+    <rect x="64" y="62" width="10" height="10" fill="#cfff45"/>
+    <text x="86" y="72" class="mono" font-size="13" letter-spacing="3" fill="#969dab">MCP SERVER · GIT AS A DATABASE · FASTMCP</text>
+    <text x="60" y="158" class="mono" font-size="76" font-weight="700" fill="#eceee6" letter-spacing="-1">mcp<tspan fill="#cfff45">-leyes</tspan></text>
+    <rect class="cursor" x="482" y="102" width="30" height="62" fill="#cfff45"/>
+    <text x="64" y="212" class="serif" font-size="31" fill="#eceee6">la ley federal mexicana,</text>
+    <text x="64" y="247" class="serif" font-size="31" fill="#eceee6">tal como estaba en cualquier fecha.</text>
+    <text x="64" y="290" class="sans" font-size="15" fill="#969dab">36 laws · 375 versions · articles, history, reform diffs, search</text>
+  </g>
+
+  <!-- Timeline: the 44 versions of the Constitution in git, 2006 to 2026 -->
+  <g transform="translate(64 330)">
+    <line x1="0" y1="20" x2="486" y2="20" stroke="#191d27" stroke-width="2"/>
+    <g fill="#7fd8ff">
+      <circle class="commit" cx="6.1" cy="20" r="3.2" style="animation-delay:0.20s"/>
+      <circle class="commit" cx="16.2" cy="20" r="3.2" style="animation-delay:0.23s"/>
+      <circle class="commit" cx="21.4" cy="20" r="3.2" style="animation-delay:0.26s"/>
+      <circle class="commit" cx="25.8" cy="20" r="3.2" style="animation-delay:0.29s"/>
+      <circle class="commit" cx="37.5" cy="20" r="3.2" style="animation-delay:0.32s"/>
+      <circle class="commit" cx="43.2" cy="20" r="3.2" style="animation-delay:0.35s"/>
+      <circle class="commit" cx="54.3" cy="20" r="3.2" style="animation-delay:0.38s"/>
+      <circle class="commit" cx="61.5" cy="20" r="3.2" style="animation-delay:0.41s"/>
+      <circle class="commit" cx="63.3" cy="20" r="3.2" style="animation-delay:0.44s"/>
+      <circle class="commit" cx="105.8" cy="20" r="3.2" style="animation-delay:0.47s"/>
+      <circle class="commit" cx="130.2" cy="20" r="3.2" style="animation-delay:0.50s"/>
+      <circle class="commit" cx="133.8" cy="20" r="3.2" style="animation-delay:0.53s"/>
+      <circle class="commit" cx="141.3" cy="20" r="3.2" style="animation-delay:0.56s"/>
+      <circle class="commit" cx="157.1" cy="20" r="3.2" style="animation-delay:0.59s"/>
+      <circle class="commit" cx="165.6" cy="20" r="3.2" style="animation-delay:0.62s"/>
+      <circle class="commit" cx="172.2" cy="20" r="3.2" style="animation-delay:0.65s"/>
+      <circle class="commit" cx="187.7" cy="20" r="3.2" style="animation-delay:0.68s"/>
+      <circle class="commit" cx="195.8" cy="20" r="3.2" style="animation-delay:0.71s"/>
+      <circle class="commit" cx="197.0" cy="20" r="3.2" style="animation-delay:0.74s"/>
+      <circle class="commit" cx="233.2" cy="20" r="3.2" style="animation-delay:0.77s"/>
+      <circle class="commit" cx="244.5" cy="20" r="3.2" style="animation-delay:0.80s"/>
+      <circle class="commit" cx="245.8" cy="20" r="3.2" style="animation-delay:0.83s"/>
+      <circle class="commit" cx="258.1" cy="20" r="3.2" style="animation-delay:0.86s"/>
+      <circle class="commit" cx="270.9" cy="20" r="3.2" style="animation-delay:0.89s"/>
+      <circle class="commit" cx="292.8" cy="20" r="3.2" style="animation-delay:0.92s"/>
+      <circle class="commit" cx="310.8" cy="20" r="3.2" style="animation-delay:0.95s"/>
+      <circle class="commit" cx="314.8" cy="20" r="3.2" style="animation-delay:0.98s"/>
+      <circle class="commit" cx="323.3" cy="20" r="3.2" style="animation-delay:1.01s"/>
+      <circle class="commit" cx="328.1" cy="20" r="3.2" style="animation-delay:1.04s"/>
+      <circle class="commit" cx="351.6" cy="20" r="3.2" style="animation-delay:1.07s"/>
+      <circle class="commit" cx="356.5" cy="20" r="3.2" style="animation-delay:1.10s"/>
+      <circle class="commit" cx="390.7" cy="20" r="3.2" style="animation-delay:1.13s"/>
+      <circle class="commit" cx="421.7" cy="20" r="3.2" style="animation-delay:1.16s"/>
+      <circle class="commit" cx="433.0" cy="20" r="3.2" style="animation-delay:1.19s"/>
+      <circle class="commit" cx="433.9" cy="20" r="3.2" style="animation-delay:1.22s"/>
+      <circle class="commit" cx="436.8" cy="20" r="3.2" style="animation-delay:1.25s"/>
+      <circle class="commit" cx="437.9" cy="20" r="3.2" style="animation-delay:1.28s"/>
+      <circle class="commit" cx="440.8" cy="20" r="3.2" style="animation-delay:1.31s"/>
+      <circle class="commit" cx="445.5" cy="20" r="3.2" style="animation-delay:1.34s"/>
+      <circle class="commit" cx="446.4" cy="20" r="3.2" style="animation-delay:1.37s"/>
+      <circle class="commit" cx="458.0" cy="20" r="3.2" style="animation-delay:1.40s"/>
+      <circle class="commit" cx="466.8" cy="20" r="3.2" style="animation-delay:1.43s"/>
+      <circle class="commit" cx="472.6" cy="20" r="3.2" style="animation-delay:1.46s"/>
+      <circle class="commit" cx="480.6" cy="20" r="3.2" style="animation-delay:1.49s"/>
+    </g>
+    <g class="scan">
+      <line x1="10" y1="4" x2="10" y2="36" stroke="#cfff45" stroke-width="2"/>
+      <circle cx="10" cy="20" r="6" fill="none" stroke="#cfff45" stroke-width="2"/>
+    </g>
+    <text x="0" y="56" class="mono" font-size="11" fill="#969dab">DOF 2006</text>
+    <text x="486" y="56" text-anchor="end" class="mono" font-size="11" fill="#969dab">DOF 2026</text>
+    <text x="243" y="56" text-anchor="middle" class="mono" font-size="11" fill="#ffb648">git log -- leyes/cpeum.md</text>
+  </g>
+
+  <!-- Terminal with real tool calls -->
+  <g transform="translate(626 52)">
+    <rect width="514" height="316" rx="14" fill="#11141b" stroke="#191d27" stroke-width="1.5"/>
+    <rect width="514" height="40" rx="14" fill="#191d27"/>
+    <rect y="26" width="514" height="14" fill="#191d27"/>
+    <circle cx="22" cy="20" r="5.5" fill="#ff5d47"/>
+    <circle cx="40" cy="20" r="5.5" fill="#ffb648"/>
+    <circle cx="58" cy="20" r="5.5" fill="#cfff45"/>
+    <text x="494" y="25" text-anchor="end" class="mono" font-size="12" fill="#969dab">stdio · 8 tools</text>
+
+    <g class="mono" font-size="13">
+      <text class="line d1" x="20" y="74"><tspan fill="#cfff45">›</tspan> <tspan fill="#7fd8ff">get_article</tspan><tspan fill="#eceee6">("CPEUM", "27", "2013-01-01")</tspan></text>
+      <text class="line d2" x="36" y="96" fill="#969dab">versión DOF <tspan fill="#eceee6">15-10-2012</tspan> · commit <tspan fill="#eceee6">9cdbce4</tspan></text>
+      <text class="line d3" x="20" y="134"><tspan fill="#cfff45">›</tspan> <tspan fill="#7fd8ff">diff_article</tspan><tspan fill="#eceee6">("CPEUM", "27", "2013-01-01")</tspan></text>
+      <text class="line d4" x="36" y="156" fill="#969dab">minerales <tspan fill="#ff5d47">[-radioactivos,-]</tspan> <tspan fill="#cfff45">{+radiactivos y litio+}</tspan></text>
+      <text class="line d5" x="20" y="194"><tspan fill="#cfff45">›</tspan> <tspan fill="#7fd8ff">diff_reform</tspan><tspan fill="#eceee6">("LFT", "2019-05-01")</tspan></text>
+      <text class="line d6" x="36" y="216" fill="#969dab"><tspan fill="#eceee6">571</tspan> artículos · <tspan fill="#eceee6">559</tspan> citan DOF 01-05-2019</text>
+      <text class="line d7" x="20" y="254"><tspan fill="#cfff45">›</tspan> <tspan fill="#7fd8ff">article_history</tspan><tspan fill="#eceee6">("CPEUM", "27")</tspan></text>
+      <text class="line d8" x="36" y="276" fill="#969dab"><tspan fill="#eceee6">10</tspan> cambios en <tspan fill="#eceee6">44</tspan> versiones archivadas</text>
+    </g>
+  </g>
+
+  <text x="1140" y="400" text-anchor="end" class="mono" font-size="11" fill="#969dab" opacity="0.8">real output · 2026-11-17 · unofficial, not legal advice</text>
+</svg>
