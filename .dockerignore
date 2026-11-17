@@ -1,0 +1,14 @@
+# Only pyproject.toml, uv.lock, README.md, LICENSE and src/ are copied into the image.
+.git
+.github
+.venv
+.pytest_cache
+.ruff_cache
+**/__pycache__
+*.py[cod]
+assets
+docs
+scripts
+tests
+dist
+build
