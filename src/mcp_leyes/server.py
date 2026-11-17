@@ -38,9 +38,9 @@ from .search import QueryError
 log = logging.getLogger("mcp_leyes")
 
 INSTRUCTIONS = """\
-Point-in-time access to 36 Mexican federal laws (Constitution, codes and federal laws) and
-375+ historical versions, from the leyes-mx git repository: every version is a commit dated on
-its publication in the Diario Oficial de la Federación (DOF).
+Point-in-time access to the Mexican federal laws tracked by the leyes-mx git repository (the
+Constitution, federal codes and laws: 36 laws and 375 versions as of November 2026). Every
+version is a commit dated on its publication in the Diario Oficial de la Federación (DOF).
 
 Typical flow: list_laws (abbreviations) -> get_article(law, article, date) for the exact text
 as it stood on a date -> article_history to see when it changed -> diff_article or diff_reform

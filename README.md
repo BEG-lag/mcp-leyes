@@ -196,7 +196,7 @@ flowchart LR
     A["Claude or any<br/>MCP client"] -- "stdio / HTTP" --> B["mcp-leyes<br/>tools, prompts,<br/>resources"]
     B --> C["SQLite index<br/>article spans, fingerprints<br/>and note dates per version"]
     B --> D[("bare git clone<br/>of leyes-mx<br/>375 versions")]
-    C -. "built once from" .-> D
+    C -.->|"built once from"| D
     D -- "git log<br/>git cat-file --batch" --> B
     D -- "git fetch<br/>at most once a day" --> E[("github.com/<br/>BEG-lag/leyes-mx")]
 ```

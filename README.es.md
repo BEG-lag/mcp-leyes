@@ -199,7 +199,7 @@ flowchart LR
     A["Claude o cualquier<br/>cliente MCP"] -- "stdio / HTTP" --> B["mcp-leyes<br/>herramientas, prompts,<br/>recursos"]
     B --> C["índice SQLite<br/>rangos de líneas, huellas<br/>y fechas de notas por versión"]
     B --> D[("clon bare de git<br/>de leyes-mx<br/>375 versiones")]
-    C -. "se construye una vez desde" .-> D
+    C -.->|"se construye una vez desde"| D
     D -- "git log<br/>git cat-file --batch" --> B
     D -- "git fetch<br/>máximo una vez al día" --> E[("github.com/<br/>BEG-lag/leyes-mx")]
 ```
