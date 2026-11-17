@@ -258,6 +258,16 @@ class Index:
             )
             return version_id
 
+    def prune(self, keep: set[tuple[str, str]]) -> int:
+        """Drop versions whose commit is no longer in the history (a rewritten source)."""
+        with self._lock:
+            rows = self._db.execute("SELECT id, slug, commit_sha FROM versions").fetchall()
+            stale = [r["id"] for r in rows if (r["slug"], r["commit_sha"]) not in keep]
+            for version_id in stale:
+                self._db.execute("DELETE FROM sections WHERE version_id=?", (version_id,))
+                self._db.execute("DELETE FROM versions WHERE id=?", (version_id,))
+            return len(stale)
+
     def commit(self) -> None:
         with self._lock:
             self._db.commit()

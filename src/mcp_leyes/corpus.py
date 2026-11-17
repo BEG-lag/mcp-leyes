@@ -373,6 +373,7 @@ class Corpus:
             return 0
         known = index.known_commits()
         added = 0
+        current: set[tuple[str, str]] = set()
         for commit in reversed(repo.log(["leyes"])):
             info: CommitInfo | None = None
             for path, blob in commit.files.items():
@@ -380,6 +381,7 @@ class Corpus:
                 if not m or path.endswith(".reformas.md"):
                     continue
                 slug = m[1]
+                current.add((slug, commit.sha))
                 if (slug, commit.sha) in known:
                     continue
                 info = info or parse_commit_message(commit.message)
@@ -398,6 +400,8 @@ class Corpus:
                     parsed=parsed,
                 )
                 added += 1
+        if index.prune(current):
+            log.warning("mcp-leyes: the source history was rewritten; dropped stale versions")
         catalog = repo.show("HEAD", "catalog.yml")
         indice = repo.show("HEAD", "data/indice.json")
         index.set_meta(

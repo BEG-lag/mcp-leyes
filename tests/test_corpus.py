@@ -8,7 +8,7 @@ from mcp_leyes import gitrepo
 from mcp_leyes.corpus import Corpus, LeyesError, NotFoundError
 from mcp_leyes.gitrepo import BareRepo, GitMissingError, run_git
 
-from .conftest import V3, commit, make_settings, noon, write
+from .conftest import V3, commit, git, make_settings, noon, write
 
 # --------------------------------------------------------------------- sync
 
@@ -81,6 +81,26 @@ def test_fetch_picks_up_new_versions_incrementally(source_copy, tmp_path) -> Non
         assert corpus.article("lfpr", "1", date(2021, 1, 31)).pick.version.dof_date == date(
             2020, 3, 10
         )
+    finally:
+        corpus.close()
+
+
+def test_rewritten_source_history_drops_stale_versions(source_copy, tmp_path) -> None:
+    corpus = Corpus(make_settings(source_copy, tmp_path))
+    corpus.sync()
+    try:
+        old_v3 = corpus.versions(corpus.resolve_law("lfpr"))[-1].commit
+        git(source_copy, "reset", "-q", "--hard", "HEAD~3")  # back to LOtra; lfpr.md at v2
+        write(source_copy, "leyes/lfpr.md", V3)
+        new_v3 = commit(
+            source_copy, "LFPr: reformas DOF 05-11-2019 a 10-03-2020", noon("2020-03-11")
+        )
+        corpus.sync(force_fetch=True)
+        commits = [v.commit for v in corpus.versions(corpus.resolve_law("lfpr"))]
+        assert len(commits) == 3
+        assert commits[-1] == new_v3
+        assert old_v3 not in commits
+        assert corpus.index.stats()["versions"] == 4
     finally:
         corpus.close()
 
