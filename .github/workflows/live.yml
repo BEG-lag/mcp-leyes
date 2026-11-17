@@ -1,0 +1,22 @@
+name: Live data check
+
+# Runs the opt-in tests against the real leyes-mx repository, so a change in its
+# conventions (headings, commit messages, data files) shows up here before users see it.
+# Kept out of the main CI so pull requests never depend on the network.
+on:
+  schedule:
+    - cron: "41 14 * * 1" # Mondays 14:41 UTC (08:41 in Mexico City), after the leyes-mx update
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+      - run: uv run --frozen pytest --live -m live -v
