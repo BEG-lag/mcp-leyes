@@ -12,6 +12,7 @@
   <img alt="MCP" src="https://img.shields.io/badge/MCP-FastMCP-7fd8ff?labelColor=0a0c10">
   <a href="https://github.com/BEG-lag/leyes-mx"><img alt="Datos: leyes-mx" src="https://img.shields.io/badge/datos-leyes--mx-ffb648?labelColor=0a0c10"></a>
   <img alt="Licencia: MIT" src="https://img.shields.io/badge/licencia-MIT-eceee6?labelColor=0a0c10">
+  <a href="https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.BEG-lag/mcp-leyes"><img alt="Registro MCP: io.github.BEG-lag/mcp-leyes" src="https://img.shields.io/badge/Registro_MCP-publicado-cfff45?labelColor=0a0c10"></a>
 </p>
 
 **mcp-leyes** es un servidor [Model Context Protocol](https://modelcontextprotocol.io) que da a
